@@ -21,7 +21,7 @@ if plotornot
 	fig=figure;
 end
 dt = 1/T; % time step
-s = 0.01; % constant speed
+s = 0.5; % constant speed
 L=20; %L is the size of the domain on which the particles can move
 
 c=zeros(2,N,T+1); % Position of all individuals at all timesteps
@@ -68,8 +68,13 @@ for t=1:T
 				sum(v(1,closeEnoughIdx,t)./norms);
 			d(2,i,t) = sum(cDiff(2,closeEnoughIdx(closeEnoughIdx~=i),i)./D(i,closeEnoughIdx(closeEnoughIdx~=i))) + ...
 				sum(v(2,closeEnoughIdx,t)./norms);
+			norms = arrayfun(@(idx) norm(d(:,idx,t)), 1:size(d(:,:,2),2));
+			d(:,:,t)=d(:,:,t)./[norms; norms]; % Normalize
 		end
 	end
+	
+	v(:,:,t+1) = s*d(:,:,t);
+	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
 	
 	if plotornot
 		qscale = 1;
