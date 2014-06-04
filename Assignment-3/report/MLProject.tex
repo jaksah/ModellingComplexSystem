@@ -1,0 +1,139 @@
+\documentclass[11pt, a4paper, twocolumn]{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{courier} % Required for the courier font
+\usepackage[utf8]{inputenc}
+\usepackage{datetime}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{arydshln}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,shapes.geometric}
+\usetikzlibrary{plotmarks}
+\usepackage[hang,small,bf]{caption}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{epstopdf}
+\usepackage[left=1.75cm, right=1.75cm, bottom=3cm, top = 3cm]{geometry}
+\usepackage{blindtext}
+\usepackage{algorithm}				%För pseudokoder
+\usepackage{algpseudocode}			%För pseudokoder
+%\usepackage{transparent}
+\usepackage{enumitem}
+%%\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+
+\newlength\figureheight
+\newlength\figurewidth
+\newlength\spacing
+
+%%%%%%%%%%%%%%%%%%%%%%% FOR DRAFT %%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\printdraft}{0} % If we want to print draft
+%%% USAGE IN TEXT:
+% 	\ifnum\printdraft>0
+% 		OUR DRAFT TEXT GOES HERE
+% 	\else
+%   \begin{center}
+%   	\textbf{--- DRAFT PARTS ---}
+%   \end{center}
+%   \fi
+%%%%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%%%%%%%%%%%%%%%%%
+\linespread{1.0} % Line spacing
+
+% Set up the header and footer
+%\pagestyle{fancy}
+\lhead{J. Sahlström, A. Lindström \& D. Dürebrandt\\ \today} % Top left header
+\rhead{Project in Modelling Complex Systems} % Right center head
+\chead{\firstxmark} % Center right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{\thepage} % Bottom center footer
+%\rfoot{Page\ \thepage\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+\newcommand\bigforall{\mbox{\LARGE $\mathsurround0pt\forall$}}  % Large for all symbol
+\setlength{\columnsep}{30pt}
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+%\includegraphics[width=0.3\textwidth]{../img/uu-logo.pdf}\\
+Couzin\\ \Large \emph{Project in Modelling Complex Systems}}
+\author{
+Jakob Sahlström \\ \scriptsize{jasa5691@student.uu.se} 
+\and
+Anders Lindström \\ \scriptsize{anli6945@student.uu.se} 
+\and
+Jesper Dürebrandt \\ \scriptsize{jedu6357@student.uu.se}
+}
+\date{Uppsala University\\\ \\\today} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][1.66\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=.8\paperwidth,height=.8\paperheight,trim=0 40 0 0, clip,%
+keepaspectratio]{img/uu-logo3.pdf}%
+%{\transparent{0.20}\includegraphics[width=.8\paperwidth,height=.8\paperheight,trim=0 40 0 0, clip,%
+%keepaspectratio]{img/uu-logo.pdf}}%
+\vfill
+}}}
+
+\begin{document}
+\AddToShipoutPicture*{\BackgroundPic}
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+% \begin{abstract}
+% \input{sections/abstract.tex}
+% \end{abstract}
+\end{@twocolumnfalse}
+]
+%\maketitle
+%\thispagestyle{empty}
+%\newpage
+\setcounter{page}{1}
+%\newpage
+% \tableofcontents
+% \newpage
+
+\section{Introduction}
+\input{sections/intro.tex}
+
+\section{Theory}
+\input{sections/theory.tex}
+
+\section{Method}
+\input{sections/method.tex}
+
+\section{Results}
+\input{sections/result.tex}
+
+\section{Discussion}
+\input{sections/discussion.tex}
+
+\section{Conclusions \& Future Work}%
+\label{sec:conc_future}
+\input{sections/conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+\nocite{*}
+
+% \begin{thebibliography}{99}
+% 	\bibitem{nb_thoery}\href{http://www.aaai.org/Papers/FLAIRS/2004/Flairs04-097.pdf}{Harry Zhang, The Optimality of Naive Bayes, AA, 2004}
+% 	\bibitem{nb_comparison}\href{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.9324&rep=rep1&type=pdf}{McCallum and K. Nigam. “A Comparison of Event Models for Naive Bayes Text Classification” }
+% \end{thebibliography}
+
+\end{document}
