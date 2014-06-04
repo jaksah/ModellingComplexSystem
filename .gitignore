@@ -7,6 +7,11 @@
 *.out
 *.toc
 Project3-Sahlstrom-Lindstrom-Durebrandt.pdf
+## Matlab files
+*.m~
+
+## Deleted Files
+.DS_Store
 
 ## Intermediate documents:
 *.dvi
