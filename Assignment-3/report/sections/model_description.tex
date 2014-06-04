@@ -1,1 +1,10 @@
-Method
+A group contains $N$ individuals, where each individual has a position $\boldsymbol{p}_i(t)$, direction $\boldsymbol{v}_i(t)$ and speed $s$. The individuals try to keep a minimum distance $\alpha$ to their neighbors by turning away from individuals $j$ within distance $\alpha$ as
+\begin{equation}
+\boldsymbol{d}_i (t+\Delta t) = - \sum_{j \neq i} \frac{\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t) |},
+\label{eq:repulsion}
+\end{equation}
+where $\boldsymbol{d}_i(t)$ is the desired direction of motion. I there are no neighbors within distance $\alpha$, the individuals will move towards individuals $j$ within distance $\rho$ as
+\begin{equation}
+\boldsymbol{d}_i (t+\Delta t) = \sum_{j \neq i} \frac{\boldsymbol{c}_j (t)- \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)|} + \sum_{j = 1} \frac{\boldsymbol{v}_j (t)}{|\boldsymbol{v}_j (t)},
+\label{eq:attraction}
+\end{equation}
