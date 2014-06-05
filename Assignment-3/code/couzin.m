@@ -1,10 +1,10 @@
 %% Flocks with nearest neighbours
 %function fi = couzin(N, T, w, p, a, rho, plotornot)
-N = 10;
-T = 100;
-w = 1;
-p = 0.1;
-a = 0.2;
+N = 100;
+T = 1000;
+w = 0.5;
+p = 0.5;
+a = 0.05;
 rho = 0.5;
 plotornot = 1;
 
@@ -20,14 +20,14 @@ plotornot = 1;
 if plotornot
 	fig=figure;
 end
-dt = 1/T; % time step
+dt = 0.1; % time step
 s = 0.5; % constant speed
 L=20; %L is the size of the domain on which the particles can move
 
 c=zeros(2,N,T+1); % Position of all individuals at all timesteps
 v=zeros(2,N,T+1); % Direction vector of all individuals at all timesteps
 d=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
-g=zeros(2,N,T+1); % Preferred direction of all individuals at all timesteps
+g=[zeros(1,round(N*p)); ones(1,round(N*p))]; % Preferred direction of informed individuals
 cDiff = zeros(2,N,N);
 c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
@@ -60,19 +60,21 @@ for t=1:T
 		%closeEnoughIdx(closeEnoughIdx==i) = [];
 		% Calculate desired direction
 		if tooCloseIdx
-			d(1,i,t) = -sum(cDiff(1,tooCloseIdx,i)./D(i,tooCloseIdx));
-			d(2,i,t) = -sum(cDiff(2,tooCloseIdx,i)./D(i,tooCloseIdx));
+			d(:,i,t) = -sum(bsxfun(@rdivide,cDiff(:,tooCloseIdx,i),...
+                D(i,tooCloseIdx)),2);
 		elseif closeEnoughIdx
-			norms = arrayfun(@(idx) norm(v(:,idx,t)), 1:size(v(:,closeEnoughIdx,t),2));
-			d(1,i,t) = sum(cDiff(1,closeEnoughIdx(closeEnoughIdx~=i),i)./D(i,closeEnoughIdx(closeEnoughIdx~=i))) + ...
-				sum(v(1,closeEnoughIdx,t)./norms);
-			d(2,i,t) = sum(cDiff(2,closeEnoughIdx(closeEnoughIdx~=i),i)./D(i,closeEnoughIdx(closeEnoughIdx~=i))) + ...
-				sum(v(2,closeEnoughIdx,t)./norms);
+			norms = arrayfun(@(idx) norm(v(:,idx,t)),...
+                1:size(v(:,closeEnoughIdx,t),2));
+			d(:,i,t) = sum(bsxfun(@rdivide,...
+                cDiff(:,closeEnoughIdx(closeEnoughIdx~=i),i),...
+                D(i,closeEnoughIdx(closeEnoughIdx~=i))),2) + ...
+				sum(bsxfun(@rdivide,v(:,closeEnoughIdx,t),norms),2);
 			norms = arrayfun(@(idx) norm(d(:,idx,t)), 1:size(d(:,:,2),2));
 			d(:,:,t)=d(:,:,t)./[norms; norms]; % Normalize
 		end
-	end
-	
+    end
+    
+	d(:,1:round(N*p),t) = (1-w)*d(:,1:round(N*p),t) + w*g;
 	v(:,:,t+1) = s*d(:,:,t);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
 	
@@ -86,6 +88,8 @@ for t=1:T
 % 		plot(x(i,j+1) ,y(i,j+1),'k.','markersize',10)
 		xlabel('X position')
 		ylabel('Y position')
+        xlim([0 10])
+        ylim([0 10])
 		drawnow
 		pause(0.1)
 	end
