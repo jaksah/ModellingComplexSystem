@@ -69,19 +69,25 @@ for t=1:T
                 cDiff(:,closeEnoughIdx(closeEnoughIdx~=i),i),...
                 D(i,closeEnoughIdx(closeEnoughIdx~=i))),2) + ...
 				sum(bsxfun(@rdivide,v(:,closeEnoughIdx,t),norms),2);
-			norms = arrayfun(@(idx) norm(d(:,idx,t)), 1:size(d(:,:,2),2));
+			norms = arrayfun(@(idx) norm(d(:,idx,t)), 1:size(d(:,:,t),2));
 			d(:,:,t)=d(:,:,t)./[norms; norms]; % Normalize
 		end
     end
     
-	d(:,1:round(N*p),t) = (1-w)*d(:,1:round(N*p),t) + w*g;
+	d(:,1:round(N*p),t) = d(:,1:round(N*p),t) + w*g;
+    
+    % Add a random (gaussian) angle to direction
+    randAngles = normrnd(0,0.01,1,size(d(:,:,t),2));
+    V = atan2(d(2,:,t),d(1,:,t)) + randAngles;
+    d(:,:,t) = [cos(V) ; sin(V)]; % d is now normalized
+    
 	v(:,:,t+1) = s*d(:,:,t);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
 	
 	if plotornot
 		qscale = 1;
 		quiver(c(1,:,t),c(2,:,t),d(1,:,t)*qscale,d(2,:,t)*qscale,...
-			'AutoScaleFactor',0.1,'Marker','.','Markersize',20,'Color','k');
+			'AutoScaleFactor',0.1,'Marker','.','Markersize',10,'Color','k');
 % 		plot([x(i,j), x(i,j+1)] ,[y(i,j),y(i,j+1)],'k-','markersize',4) %plots the first half of the particles in black
 % 		axis([0 L 0 L]);
 % 		hold on
