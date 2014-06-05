@@ -32,7 +32,7 @@ cDiff = zeros(2,N,N);
 c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
 
-
+elong = zeros(1,T);
 % T(i,j) gives the angle with the x axis of the direction of motion of the ith
 % particle at time j
 %T=zeros(N,J+1);
@@ -72,7 +72,7 @@ for t=1:T
 			norms = arrayfun(@(idx) norm(d(:,idx,t)), 1:size(d(:,:,t),2));
 			d(:,:,t)=d(:,:,t)./[norms; norms]; % Normalize
 		end
-    end
+	end
     
 	d(:,1:round(N*p),t) = d(:,1:round(N*p),t) + w*g;
     
@@ -80,18 +80,21 @@ for t=1:T
     randAngles = normrnd(0,0.01,1,size(d(:,:,t),2));
     V = atan2(d(2,:,t),d(1,:,t)) + randAngles;
     d(:,:,t) = [cos(V) ; sin(V)]; % d is now normalized
-    
+    grpdir = mean(d(:,:,t),2);
+	
 	v(:,:,t+1) = s*d(:,:,t);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
+	
+	[bb, e] = orientedBoundingBox(c(:,:,t), grpdir);
+	elong(t) = e;
 	
 	if plotornot
 		qscale = 1;
 		quiver(c(1,:,t),c(2,:,t),d(1,:,t)*qscale,d(2,:,t)*qscale,...
 			'AutoScaleFactor',0.1,'Marker','.','Markersize',10,'Color','k');
-% 		plot([x(i,j), x(i,j+1)] ,[y(i,j),y(i,j+1)],'k-','markersize',4) %plots the first half of the particles in black
-% 		axis([0 L 0 L]);
-% 		hold on
-% 		plot(x(i,j+1) ,y(i,j+1),'k.','markersize',10)
+		hold on
+		plot(bb(1,[1:end 1]), bb(2,[1:end 1]),'r-')
+		hold off
 		xlabel('X position')
 		ylabel('Y position')
         xlim([0 10])
@@ -99,79 +102,7 @@ for t=1:T
 		drawnow
 		pause(0.1)
 	end
-% 	
-% 	%For each particle
-% 	for i=1:N
-% 		%finds how many particles are in the interaction radius of each
-% 		%particle
-% % 		xDiff(:,1) = x(i,j)-x(:,j);
-% % 		xDiff(:,2) = x(i,j)-x(:,j)-L;
-% % 		xDiff(:,3) = x(i,j)-x(:,j)+L;
-% % 		
-% % 		yDiff(:,1) = y(i,j)-y(:,j);
-% % 		yDiff(:,2) = y(i,j)-y(:,j)-L;
-% % 		yDiff(:,3) = y(i,j)-y(:,j)+L;
-% % 		
-% % 		for xIdx = 1:size(xDiff,2)
-% % 			for yIdx = 1:size(yDiff,2)
-% % 				A(:,(yIdx-1)*3+xIdx) = ((xDiff(:,xIdx)).^2+(yDiff(:,yIdx)).^2).^0.5;
-% % 			end
-% % 		end
-% 
-% 		D = min(A,[],2); % Calculate smallest distance to particle i
-% 		[sortedD, sortedIdxD] = sort(D);
-% 		nNearestIdx = sortedIdxD(1:n+1); % 1 is the particle itself.
-% 		
-% 		% Get those particles that are too near particle i
-% 		tooNear = ((sortedD(2:end) < sep)).*sortedIdxD(2:end);
-% 		tooNear(tooNear==0)=[];
-% 		
-% 		repDirX = 0;
-% 		repDirY = 0;
-% 		% Calculate the repulsion term and weight it with 1/d^2
-% 		if(useRepulsion && ~isempty(tooNear))
-% 			diffX = min(xDiff(tooNear),[],2);
-% 			diffY = min(yDiff(tooNear),[],2);
-% 			vLen = (diffX.^2+diffY.^2).^0.5;
-% 			diffX = diffX./vLen./D(tooNear).^2;
-% 			diffY = diffY./vLen./D(tooNear).^2;
-% 			repDirX = sum(diffX);
-% 			repDirY = sum(diffY);
-% 			repDirX = repDirX./length(tooNear);
-% 			repDirY = repDirY./length(tooNear);
-% 		end
-% 		
-% 		sc=(alpha)*sum(cos(T(nNearestIdx,j)))/(n+1) + (1-alpha)*repDirX;
-% 		ss=(alpha)*sum(sin(T(nNearestIdx,j)))/(n+1) + (1-alpha)*repDirY;
-% 		S=atan2(ss,sc);
-% 		
-% 		
-% 		T(i,j+1)=S+e*(rand-0.5); %adds noise to the measured angle
-% 		x(i,j+1)=x(i,j)+v*cos(T(i,j+1)); %updates the particles' x-coordinates
-% 		y(i,j+1)=y(i,j)+v*sin(T(i,j+1)); %updates the particles' y coordinates
-% 		% Jumps from the right of the box to the left or vice versa
-% 		x(i,j+1)=mod(x(i,j+1),L);
-% 		%Jumps from the top of the box to the bottom or vice versa
-% 		y(i,j+1)=mod(y(i,j+1),L);
-% 		%Plot particles
-% 		if makemovie
-% 			if abs(x(i,j)-x(i,j+1))<v & abs(y(i,j)-y(i,j+1))<v
-% 				plot([x(i,j), x(i,j+1)] ,[y(i,j),y(i,j+1)],'k-','markersize',4) %plots the first half of the particles in black
-% 				axis([0 L 0 L]);
-% 				hold on
-% 				plot(x(i,j+1) ,y(i,j+1),'k.','markersize',10)
-% 				xlabel('X position')
-% 				ylabel('Y position')
-% 			end
-% 		end
-% 	end
-% 	
-% 	fi(j+1) = abs(1/N*sqrt(sum(cos(T(:,j+1)))^2+sum(sin(T(:,j+1)))^2)); % Global alignment
-% 	if makemovie
-% 		hold off
-% 		M(j)=getframe; %makes a movie fram from the plot
-% 		%movien = addframe(movien,M(j)); %adds this movie fram to the movie
-% 	end
+
 	
 end
 
