@@ -1,12 +1,12 @@
 %% Flocks with nearest neighbours
-%function fi = couzin(N, T, w, p, a, rho, plotornot)
-N = 100;
-T = 1000;
-w = 0.5;
-p = 0.5;
-a = 0.05;
-rho = 0.5;
-plotornot = 1;
+function [elong, groupdir] = couzin(N, T, w, p, a, rho, plotornot)
+%N = 10;
+%T = 1000;
+%w = 0.5;
+%p = 0.5;
+%a = 0.01;
+%rho = 0.1;
+%plotornot = 1;
 
 %{ 
 	N - Number of individuals
@@ -33,6 +33,7 @@ c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
 
 elong = zeros(1,T);
+groupdir = zeros(1,T);
 % T(i,j) gives the angle with the x axis of the direction of motion of the ith
 % particle at time j
 %T=zeros(N,J+1);
@@ -80,12 +81,12 @@ for t=1:T
     randAngles = normrnd(0,0.01,1,size(d(:,:,t),2));
     V = atan2(d(2,:,t),d(1,:,t)) + randAngles;
     d(:,:,t) = [cos(V) ; sin(V)]; % d is now normalized
-    grpdir = mean(d(:,:,t),2);
+    groupdir(t) = mean(d(:,:,t),2);
 	
 	v(:,:,t+1) = s*d(:,:,t);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
 	
-	[bb, e] = orientedBoundingBox(c(:,:,t), grpdir);
+	[bb, e] = orientedBoundingBox(c(:,:,t), grpdir(t));
 	elong(t) = e;
 	
 	if plotornot
@@ -97,14 +98,15 @@ for t=1:T
 		hold off
 		xlabel('X position')
 		ylabel('Y position')
-        xlim([0 10])
-        ylim([0 10])
+        xlim([0 5])
+        ylim([0 5])
 		drawnow
 		pause(0.1)
 	end
 
 	
 end
+
 
 
 %movien = close(movien); %finishes the movie
