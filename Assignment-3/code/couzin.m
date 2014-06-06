@@ -1,12 +1,12 @@
 %% Flocks with nearest neighbours
-function [elong, groupdir] = couzin(N, T, w, p, a, rho, plotornot)
-%N = 10;
-%T = 1000;
-%w = 0.5;
-%p = 0.5;
-%a = 0.01;
-%rho = 0.1;
-%plotornot = 1;
+%function [elong, groupdir] = couzin(N, T, w, p, a, rho, plotornot)
+N = 10;
+T = 1000;
+w = 0.5;
+p = 0.5;
+a = 0.01;
+rho = 0.1;
+plotornot = 1;
 
 %{ 
 	N - Number of individuals
@@ -15,6 +15,14 @@ function [elong, groupdir] = couzin(N, T, w, p, a, rho, plotornot)
 	p - Proportion of indiviuals with knowledge of preferred direction
 	a - Minimum distance between particles
 %}
+
+N = 10;
+T = 1000;
+w = 0.5;
+p = 0.5;
+a = 0.01;
+rho = 0.1;
+plotornot = 1;
 %Set up movie
 
 if plotornot
