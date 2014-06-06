@@ -1,21 +1,36 @@
 
-N = 10; % Number of individuals
-T = 100; % Number of timesteps
-w = 1; % Weight of influence of preferred direction
-p = 0.1; % Proportion of indiviuals with knowledge of preferred direction
+%N = 30; % Number of individuals
+T = 1500; % Number of timesteps
+w = 0.5; % Weight of influence of preferred direction
+%p = 0.1; % Proportion of indiviuals with knowledge of preferred direction
 a = 1; % Minimum distance between particles
 rho = 6; % Radius of particles to interact with
-gamma = 0; % Uncertainty of preferred direction
+gam = 0; % Uncertainty of preferred direction
 plotornot = 0; 
-reps = 10;
+reps = 2;
 
-Nvals = [10 30 50 100 200];
-pvals = 0:0.1:1;
-
-for N=Nvals
-	for p=pvals
+%Nvals = [10 30 50 100 200];
+Nvals = [30];
+pvals = 0:0.05:1;
+elongvals = zeros(length(pvals),length(Nvals));
+tic;
+for Nidx=1:length(Nvals)
+	N = Nvals(Nidx)
+	for pidx=1:length(pvals)
+		p = pvals(pidx)
 		for rep=1:reps
-			[elong, groupdir] = couzin(N, T, w, p, a, rho, plotornot);
+			rep
+			toc
+			[e, groupdir] = couzin(N, T, w, p, a, rho, gam, plotornot);
+			elongvals(pidx,Nidx) = elongvals(pidx,Nidx) + mean(e(end-10:end));
 		end
+		elongvals(pidx,Nidx) = elongvals(pidx,Nidx)/reps;
 	end
 end
+%%
+plot(pvals,elongvals(:,1),'o-')
+xlabel('p')
+ylabel('Elongitude')
+hold on
+y = 1./pvals;
+plot(pvals, y,'.')

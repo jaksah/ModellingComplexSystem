@@ -1,5 +1,5 @@
 %% Flocks with nearest neighbours
-function [elong, groupdir] = couzin(N, T, w, prop, a, rho, gam, plotornot)
+function [elong, groupdir] = couzinAngle(N, T, w, prop, a, rho, gam, plotornot)
 %{ 
 	N - Number of individuals
 	T - Number of timesteps
