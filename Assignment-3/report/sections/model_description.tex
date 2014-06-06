@@ -10,7 +10,9 @@ where $\boldsymbol{d}_i(t)$ is the desired direction of motion. If there are no 
 \end{equation}
 The direction $\boldsymbol{d}_i(t)$ is normalized to a unit vector $\hat{\boldsymbol{d}}_i(t)$. A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}}$ to go, and their desired direction is given by
 \begin{equation}
-\boldsymbol{d}_i^\prime (t+\Delta t) = (1-\omega)\hat{\boldsymbol{d}}_i (t+\Delta t) + \omega \hat{\boldsymbol{g}},
+\boldsymbol{d}_i^\prime (t+\Delta t) = \frac{\hat{\boldsymbol{d}}_i (t+\Delta t) + \omega \hat{\boldsymbol{g}}}{|\hat{\boldsymbol{d}}_i (t+\Delta t) + \omega \hat{\boldsymbol{g}}|},
 \label{eq:attraction}
 \end{equation}
-where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and $\omega=1$ makes the individual move only in the known direction.
+where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
+
+A small random angle $\theta$ is added to 

@@ -33,7 +33,7 @@ c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
 
 elong = zeros(1,T);
-groupdir = zeros(1,T);
+groupdir = zeros(2,T);
 % T(i,j) gives the angle with the x axis of the direction of motion of the ith
 % particle at time j
 %T=zeros(N,J+1);
@@ -81,12 +81,12 @@ for t=1:T
     randAngles = normrnd(0,0.01,1,size(d(:,:,t),2));
     V = atan2(d(2,:,t),d(1,:,t)) + randAngles;
     d(:,:,t) = [cos(V) ; sin(V)]; % d is now normalized
-    groupdir(t) = mean(d(:,:,t),2);
+    groupdir(:,t) = mean(d(:,:,t),2);
 	
 	v(:,:,t+1) = s*d(:,:,t);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
 	
-	[bb, e] = orientedBoundingBox(c(:,:,t), grpdir(t));
+	[bb, e] = orientedBoundingBox(c(:,:,t), groupdir(:,t));
 	elong(t) = e;
 	
 	if plotornot
