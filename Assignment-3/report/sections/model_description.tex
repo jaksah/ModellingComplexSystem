@@ -1,18 +1,57 @@
-A group contains $N$ individuals, where each individual $i$ has a position vector $\boldsymbol{c}_i(t)$, direction vector $\boldsymbol{v}_i(t)$ and speed $s$. The individuals avoid collisions with their neighbors by turning away from individuals $j$ within distance $\alpha$ according to
+% A group contains $N$ individuals, where each individual $i$ has a position vector $\boldsymbol{c}_i(t)$, direction as a scalar $d_i(t)$ defined as counter-clockwise angle from the positive x-axis, and speed $s$. 
+% The individuals avoid collisions with their neighbors by turning away from individuals $j$ within distance $\alpha$ according to
+% \begin{equation}
+% d_i (t+\Delta t) = \arg \left(- \sum_{j \neq i} \frac{\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t) |}\right),
+% \label{eq:repulsion}
+% \end{equation}
+%  where $\arg$ refer to angle to the positive x-axis of of the resulting vector inside the parenthesis and $d_i(t)$ is the desired direction of motion. 
+%  If there are no neighbors within distance $\alpha$, the individuals will move towards individuals $j$ within distance $\rho$ according to
+% \begin{equation}
+% d_p (t) = \arg \left(\sum_{j \neq i} \frac{\boldsymbol{c}_j (t)- \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)|} \right),
+% \label{eq:dp}
+% \end{equation}
+
+% \begin{equation}
+% d_d (t) = \text{mean}\left( \sum_{j = 1} d_j (t) \right),
+% \label{eq:dd}
+% \end{equation}
+
+% \begin{equation}
+% d_i (t+\Delta t) = \frac{d_p (t) + d_d (t)}{2}.
+% \label{eq:attraction}
+% \end{equation}
+% Here $d_p$ is the direction from individual $i$ to individual $j$, and $d_d$ is the mean value of the directions of the individuals $j$.
+% A proportion $p$ of the individuals know in which direction $g$ to go, and their desired direction is given by
+% \begin{equation}
+% d_i^\prime (t+\Delta t) = d_i (t+\Delta t) + \omega (g - d_i (t+\Delta t)),
+% \label{eq:attraction}
+% \end{equation}
+% where $\omega$ decides the influence of the known direction $g$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
+% \\\\
+% A small random angle $\theta$ is added to 
+
+
+
+
+
+A group contains $N$ individuals, where each individual $i$ has a position vector $\boldsymbol{c}_i(t)$, direction vector $\boldsymbol{v}_i(t)$ and speed $s$. 
+The individuals avoid collisions with their neighbors by turning away from individuals $j$ within distance $\alpha$ according to
 \begin{equation}
 \boldsymbol{d}_i (t+\Delta t) = - \sum_{j \neq i} \frac{\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t) |},
 \label{eq:repulsion}
 \end{equation}
-where $\boldsymbol{d}_i(t)$ is the desired direction of motion. If there are no neighbors within distance $\alpha$, the individuals will move towards individuals $j$ within distance $\rho$ according to
+where $\boldsymbol{d}_i(t)$ is the desired direction of motion. 
+If there are no neighbors within distance $\alpha$, the individuals will move towards individuals $j$ within distance $\rho$ according to
 \begin{equation}
 \boldsymbol{d}_i (t+\Delta t) = \sum_{j \neq i} \frac{\boldsymbol{c}_j (t)- \boldsymbol{c}_i (t)}{|\boldsymbol{c}_j (t) - \boldsymbol{c}_i (t)|} + \sum_{j = 1} \frac{\boldsymbol{v}_j (t)}{|\boldsymbol{v}_j (t)|}.
 \label{eq:attraction}
 \end{equation}
-The direction $\boldsymbol{d}_i(t)$ is normalized to a unit vector $\hat{\boldsymbol{d}}_i(t)$. A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}}$ to go, and their desired direction is given by
+The direction $\boldsymbol{d}_i(t)$ is normalized to a unit vector $\hat{\boldsymbol{d}}_i(t)$. 
+A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}}$ to go, and their desired direction is given by
 \begin{equation}
 \boldsymbol{d}_i^\prime (t+\Delta t) = \frac{\hat{\boldsymbol{d}}_i (t+\Delta t) + \omega \hat{\boldsymbol{g}}}{|\hat{\boldsymbol{d}}_i (t+\Delta t) + \omega \hat{\boldsymbol{g}}|},
 \label{eq:attraction}
 \end{equation}
 where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
-
+\\\\
 A small random angle $\theta$ is added to 
