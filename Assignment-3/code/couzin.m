@@ -44,7 +44,7 @@ for t=1:T
 		for j = i+1:N
             % x- and y- distance with sign between individuals
 			cDiff(:,i,j) = c(:,i,t)-c(:,j,t);
-			cDiff(:,j,1) = -cDiff(:,i,j);
+			cDiff(:,j,i) = -cDiff(:,i,j);
 		end
 	end
 	for i = 1:N
