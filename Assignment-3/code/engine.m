@@ -1,4 +1,4 @@
-
+clear all
 %N = 30; % Number of individuals
 T = 1000; % Number of timesteps
 w = 0.5; % Weight of influence of preferred direction
@@ -57,25 +57,6 @@ y = (N./(((sqrt(N.*pvals)-ones(size(pvals)))*a).^2));
 plot(pvals, y,'k.:')
 set(gca, 'YLim', [0 5])
 legend('Simulation', 'Approximation','Master Equation')
-
-%%
-alpha = 1;
-myMax = 5;
-x1 = 1:alpha:myMax;
-x2 = x1-alpha/2;
-y1 = x1;
-y2 = x1+alpha;
-figure;
-xUn = [x1(1:end-2) x2(1:end-2)];
-xIn = [x1(end-1:end) x2(end-1:end)];
-yUn = [y1(1:end-2) y2(1:end-2)];
-yIn = [y1(end-1:end) y2(end-1:end)];
-plot(xUn,yUn,'k.')
-hold on
-plot(xIn,yIn,'ko')
-
-set(gca, 'YLim', [-1 myMax+2], 'XLim', [-1 myMax+1]);
-legend('Uninformed','Informed')
 
 
 
