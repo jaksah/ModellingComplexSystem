@@ -23,23 +23,26 @@ c=zeros(2,N,T+1); % Position of all individuals at all timesteps
 v=zeros(2,N,T+1); % Direction vector of all individuals at all timesteps
 d=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
 centroid=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
-nInformed = round(N*p);
+nInformed = round(N*p); % Number of informed individuals
 g = [ones(1,nInformed); zeros(1,nInformed)];
 %g=ones(2,nInformed)/sqrt(2); % Preferred direction of informed individuals
 cDiff = zeros(2,N,N);
 c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
 
-elong = zeros(1,T);
-groupdir = zeros(2,T);
+elong = zeros(1,T); % Elongation
+groupdir = zeros(2,T); % Group direction, mean of all individuals direction
 groupdir(:,1) = mean(d(:,:,1),2);
 
 %For all time steps
 for t=1:T
 	d(:,:,t+1)=d(:,:,t);
+    % Distance between each individual
 	D = squareform(pdist(c(:,:,t)'),'tomatrix');
+
 	for i = 1:N		
 		for j = i+1:N
+            % x- and y- distance with sign between individuals
 			cDiff(:,i,j) = c(:,i,t)-c(:,j,t);
 			cDiff(:,j,1) = -cDiff(:,i,j);
 		end
@@ -51,7 +54,7 @@ for t=1:T
 		closeEnoughIdx = find(D(i,:)<rho);
 		%closeEnoughIdx(closeEnoughIdx==i) = [];
 		% Calculate desired direction
-		if tooCloseIdx
+		if tooCloseIdx % If someone is too close
 			repel = -sum(bsxfun(@rdivide,cDiff(:,tooCloseIdx,i),...
                 D(i,tooCloseIdx)),2);
 			d(:,i,t+1) = d(:,i,t) + repel;
@@ -68,6 +71,7 @@ for t=1:T
     norms = arrayfun(@(idx) norm(d(:,idx,t+1)), 1:size(d(:,:,t+1),2));
 	d(:,:,t+1)=d(:,:,t+1)./[norms; norms]; % Normalize
 	
+    % Weigh in the prefered direction g with weight w
 	d(:,1:nInformed,t+1) = d(:,1:nInformed,t+1) + w*g;
     
     % Add a random (gaussian) angle to direction
