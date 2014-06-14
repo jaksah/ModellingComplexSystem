@@ -7,19 +7,11 @@ function [elong, groupdir] = couzin(N, T, w, p, a, rho, gam, plotornot)
 	w - Weight of influence of preferred direction
 	p - Proportion of indiviuals with knowledge of preferred direction
 	a - Minimum distance between particles
-
-
-N = 100;
-T = 1000;
-w = 0.5;
-p = 0.5;
-a = 1;
-rho = 6;
-plotornot = 1;
-gam = 0;
+    rho - Attraction distance
+    gam - Standard deviation of random angle
 %}
 
-%Set up movie
+%Set up plot
 if plotornot
 	fig=figure;
 end
@@ -32,7 +24,7 @@ c=zeros(2,N,T+1); % Position of all individuals at all timesteps
 v=zeros(2,N,T+1); % Direction vector of all individuals at all timesteps
 d=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
 nInformed = round(N*p);
-g=[ones(1,nInformed); ones(1,nInformed)]; % Preferred direction of informed individuals
+g=ones(2,nInformed)/sqrt(2); % Preferred direction of informed individuals
 cDiff = zeros(2,N,N);
 c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
@@ -47,8 +39,6 @@ groupdir(:,1) = mean(d(:,:,1),2);
 %fi = zeros(1,J+1);
 %fi(1) = abs(1/N*sqrt(sum(cos(T(:,1)))^2+sum(sin(T(:,1)))^2)); % Global alignment
 
-sigma = 0.01;
-% Use normrnd(0, sigma) for random angle
 
 %For all time steps
 for t=1:T
@@ -121,14 +111,5 @@ for t=1:T
         ylim([-10 40])
 		drawnow
 		pause(0.001)
-	end
-
-	
+    end
 end
-
-
-
-%movien = close(movien); %finishes the movie
-
-
-

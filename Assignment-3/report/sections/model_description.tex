@@ -33,7 +33,6 @@
 
 
 
-
 A group contains $N$ individuals, where each individual $i$ has a position vector $\boldsymbol{c}_i(t)$, direction vector $\boldsymbol{v}_i(t)$ and speed $s$. 
 The individuals avoid collisions with their neighbors by turning away from individuals $j$ within distance $\alpha$ according to
 \begin{equation}
@@ -54,4 +53,4 @@ A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}
 \end{equation}
 where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
 \\\\
-A small random angle $\theta$ is added to 
+The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation 0.01, in order to simulate stochastic factors that make impact on the movement of the group. 

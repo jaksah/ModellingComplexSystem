@@ -7,7 +7,7 @@ a = 1; % Minimum distance between particles
 rho = 6; % Radius of particles to interact with
 gam = 0; % Uncertainty of preferred direction
 plotornot = 0; 
-reps = 2;
+reps = 1;
 
 %Nvals = [10 30 50 100 200];
 Nvals = [30];
@@ -22,7 +22,7 @@ for Nidx=1:length(Nvals)
 			rep
 			toc
 			[e, groupdir] = couzin(N, T, w, p, a, rho, gam, plotornot);
-			elongvals(pidx,Nidx) = elongvals(pidx,Nidx) + mean(e(end-10:end));
+			elongvals(pidx,Nidx) = elongvals(pidx,Nidx) + mean(e(end-100:end));
 		end
 		elongvals(pidx,Nidx) = elongvals(pidx,Nidx)/reps;
 	end
