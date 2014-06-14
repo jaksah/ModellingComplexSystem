@@ -54,9 +54,11 @@ The direction of each individual is rotated by a small random angle, picked from
 
 \subsection{Movement} % (fold)
 \label{sub:movement}
-In each time step an individual can change its direction by a maximum of $\theta \Delta t$. 
+The directions of all the individuals in each time step will be offset by a small angle, randomized as a Gaussian distribution centered on 0 with a standard deviation $\sigma = 0.01$.
+\\\\
+In each time step an individual can change its direction by a maximum angle of $\theta \Delta t$. 
 If the difference in angle between its calculated wanted new direction $\boldsymbol{d}_i''$ and its current direction is lower than $\theta \Delta t$, its velocity will be set to $\boldsymbol{v}_i(t + \Delta t) = \boldsymbol{d}_i''$.
-If it is higher, it will be changing its direction angle with $\theta \Delta t$ towards direction $\boldsymbol{d}_i''$. 
+If it is higher, the individual will be changing its direction angle with $\theta \Delta t$ towards direction $\boldsymbol{d}_i''$. 
 The new velocity $\boldsymbol{v}_i(t + \Delta t)$ will then be used to calculate the new position, as 
 \begin{equation}
 	\boldsymbol{c}_i(t+\Delta t) = \boldsymbol{c}_i(t) + \boldsymbol{v}_i(t + \Delta t)\Delta t s_i,
