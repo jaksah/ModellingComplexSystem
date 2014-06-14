@@ -5,22 +5,32 @@ The rest of the group will follow the informed group, so that if there are the s
 	\centering
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth]{img/Circle.pdf}
-		\caption{Actual distribution in box.\\\ }
-		\label{fig:hitratio-nb}
+		\caption{Actual distribution in box.}
+		\label{fig:distr_true}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth]{img/Square.pdf}
-		\caption{Analytically approximated distribution}
-		\label{fig:hitratio-mn}
+		\caption{Approximated distribution}
+		\label{fig:distr_approx}
 	\end{subfigure}
-	\caption{Hit ratio as a function of vocabulary size after $\chi^2$ feature selection for different classifiers and data types.}
-	\label{fig:hitratio}
+	\caption{Approximation of particle distribution inside bounding box.}
+	\label{fig:distr}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.24\textwidth]{img/heightwidth.pdf}
-	\caption{Here is stuff.}
-	\label{fig:hitratio}
+	\caption{Assumption of distribution when 4 out of 12 particles have information of destination. Circles indicates informed particles, solid dots indicates uninformed.}
+	\label{fig:distr_direction}
 \end{figure}
+From the definition of Elongation, see \ref{sub:elongation}, we can put up a master equation for the elongation. With a distance between particles of length $\alpha$ we can define the parameters in Figure \ref{fig:distr_direction} as
+\begin{align}
+	h\cdot w &= N \\
+	w &= (\sqrt{Np}-1)\alpha
+\end{align}
+The elongation can be calculated as 
+\begin{equation}
+	E = \frac{h}{w} = \frac{N}{(\alpha(\sqrt{Np}-1))^2}
+\end{equation}
+
