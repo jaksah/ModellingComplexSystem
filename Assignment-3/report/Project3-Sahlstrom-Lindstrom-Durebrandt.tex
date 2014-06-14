@@ -46,9 +46,11 @@
 \linespread{1.0} % Line spacing
 
 % Set up the header and footer
-%\pagestyle{fancy}
-\lhead{J. Sahlström, A. Lindström \& D. Dürebrandt\\ \today} % Top left header
-\rhead{Project in Modelling Complex Systems} % Right center head
+\pagestyle{fancy}
+%\lhead{J. Sahlström, A. Lindström \& J. Dürebrandt\\ \today} % Top left header
+%\rhead{Project in Modelling Complex Systems} % Right center head
+\lhead{\leftmark}
+\rhead{\rightmark}
 \chead{\firstxmark} % Center right header
 \lfoot{\lastxmark} % Bottom left footer
 \cfoot{\thepage} % Bottom center footer
@@ -114,9 +116,10 @@ keepaspectratio]{img/uu-logo3.pdf}%
 \section{Model Description}
 \input{sections/model_description.tex}
 
+\onecolumn
 \section{Simulation Results}
 \input{sections/sim_result.tex}
-
+\twocolumn
 \section{Analytical Results}
 \input{sections/ana_result.tex}
 
