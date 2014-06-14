@@ -31,8 +31,9 @@ c(:,:,1) = rand(2,N); % Random initial position
 v(:,:,1) = rand(2,N); % Random initial direction
 
 elong = zeros(1,T); % Elongation
-groupdir = zeros(2,T); % Group direction, mean of all individuals direction
+groupdir = zeros(2,T+1); % Group direction, mean of all individuals direction
 groupdir(:,1) = mean(d(:,:,1),2);
+centroid(:,1) = mean(c(:,:,1),2);
 
 %For all time steps
 for t=1:T
