@@ -71,3 +71,15 @@ where $s_i$ is the speed of the individual
 A bounding box is calculated for given time steps, which is defined as the smallest box that can contain all individuals in the simulations, having one side parallel to the mean direction of the group in that time step, and the other side perpendicular.
 The elongation is defined as the length of the parallel side divided the length of the perpendicular side.
 % subsection elongation (end)
+
+\subsection{Accuracy} % (fold)
+\label{sub:accuracy}
+The accuracy of the group is defined as 
+\begin{equation}
+	\hat{a} = \text{mean} ((h - g)^2),
+\end{equation}
+where $h$ is the group direction angle and $g$ is the direction to food, so that for a completely random direction of the group, an average of 0.5 would be expected. After this, a normalization was done to have values between 0 and 1, as
+\begin{equation}
+	a = 2(\hat{a} - 0.5).
+\end{equation}
+% subsection accuracy (end)
