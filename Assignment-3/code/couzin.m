@@ -38,9 +38,10 @@ groupdir(:,1) = mean(d(:,:,1),2);
 for t=1:T
 	d(:,:,t+1)=d(:,:,t);
 	D = squareform(pdist(c(:,:,t)'),'tomatrix');
-	for i = 1:N
-		for j = 1:N
+	for i = 1:N		
+		for j = i+1:N
 			cDiff(:,i,j) = c(:,i,t)-c(:,j,t);
+			cDiff(:,j,1) = -cDiff(:,i,j);
 		end
 	end
 	for i = 1:N
