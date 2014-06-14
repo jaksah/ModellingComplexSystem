@@ -34,8 +34,9 @@ a = 1;
 for i = 1:size(tot_y,1)
 	N = Ns(i);
 	%y_approx(i,:) = (N./(((sqrt(w*N.*p)-1)*a).*((sqrt(N.*p)-1)*a)));
-	y_approx(i,:) = (((N./sqrt(N*p*w)-1)*a)./(((sqrt(w*N.*p)-1)*a)));
+	%y_approx(i,:) = (((N./sqrt(N*p*w)-1)*a)./(((sqrt(w*N.*p)-1)*a)));
 	%y_approx(i,:) = y_approx(i,:)./(1+(y_approx(i,:)).*exp(-p*10000));
+	y_approx(i,:) = 1./(p.*w);
 end
 
 for i = 1:size(tot_y,1)
