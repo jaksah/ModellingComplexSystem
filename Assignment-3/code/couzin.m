@@ -1,5 +1,5 @@
 %% Flocks with nearest neighbours
-function [elong, groupdir, centroid] = couzin(N, T, w, p, a, rho, gam,g, plotornot)
+function [elong, centroid] = couzin(N, T, w, p, a, rho, gam,g, plotornot)
 
 %{ 
 	N - Number of individuals
@@ -111,5 +111,5 @@ for t=1:T
         ylim([-10 40])
 		drawnow
 		pause(0.001)
-    end
+	end
 end

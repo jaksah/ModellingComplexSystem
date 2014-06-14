@@ -1,6 +1,6 @@
 
 %N = 30; % Number of individuals
-T = 1500; % Number of timesteps
+T = 1000; % Number of timesteps
 w = 0.5; % Weight of influence of preferred direction
 %p = 0.1; % Proportion of indiviuals with knowledge of preferred direction
 a = 1; % Minimum distance between particles
