@@ -1,0 +1,114 @@
+% This file was created by matlab2tikz v0.4.3.
+% Copyright (c) 2008--2013, Nico Schlmer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=1,
+xlabel={Proportion of informed individuals},
+ymin=0,
+ymax=1.1,
+ylabel={Accuracy},
+axis x line*=bottom,
+axis y line*=left,
+legend style={draw=black,fill=white,legend cell align=left}
+]
+\addplot [
+color=red,
+solid,
+line width=2.0pt,
+mark=triangle,
+mark options={solid,,rotate=180}
+]
+table[row sep=crcr]{
+0 0.403156228560285\\
+0.1 0.595839630695204\\
+0.2 0.884699864455051\\
+0.3 0.957500595943143\\
+0.4 0.995103082119124\\
+0.5 0.99277785235641\\
+0.6 0.994297758230592\\
+0.7 0.997162797318666\\
+0.8 0.997657711817104\\
+0.9 0.998891123253124\\
+1 0.998750423680311\\
+};
+\addlegendentry{N = 10};
+
+\addplot [
+color=blue,
+solid,
+line width=2.0pt,
+mark=triangle,
+mark options={solid}
+]
+table[row sep=crcr]{
+0 0.416305959269065\\
+0.1 0.622585394353216\\
+0.2 0.982719808584892\\
+0.3 0.997373704319025\\
+0.4 0.998060278868969\\
+0.5 0.998422766249404\\
+0.6 0.999403345400252\\
+0.7 0.999383030373531\\
+0.8 0.99971187838336\\
+0.9 0.999652399893434\\
+1 0.999610474211614\\
+};
+\addlegendentry{N = 30};
+
+\addplot [
+color=green,
+solid,
+line width=2.0pt,
+mark=square,
+mark options={solid}
+]
+table[row sep=crcr]{
+0 0.136728685420078\\
+0.1 0.795139008273545\\
+0.2 0.913699835617661\\
+0.3 0.997957312365453\\
+0.4 0.999644670432802\\
+0.5 0.999513859613597\\
+0.6 0.999784218096512\\
+0.7 0.999740021489187\\
+0.8 0.999862871536976\\
+0.9 0.999609253422164\\
+1 0.999723523474377\\
+};
+\addlegendentry{N = 50};
+
+\addplot [
+color=black,
+solid,
+line width=2.0pt,
+mark=o,
+mark options={solid}
+]
+table[row sep=crcr]{
+0 0.0403555535640585\\
+0.1 0.841362160632321\\
+0.2 0.998584641089824\\
+0.3 0.999780086016755\\
+0.4 0.999295390142912\\
+0.5 0.999511563777521\\
+0.6 0.999827218300324\\
+0.7 0.999865379927518\\
+0.8 0.99988137492601\\
+0.9 0.999939826470288\\
+1 0.999871148197723\\
+};
+\addlegendentry{N = 100};
+
+\end{axis}
+\end{tikzpicture}%
