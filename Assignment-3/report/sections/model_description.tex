@@ -30,9 +30,6 @@
 % \\\\
 % A small random angle $\theta$ is added to 
 
-
-
-
 A group contains $N$ individuals, where each individual $i$ has a position vector $\boldsymbol{c}_i(t)$, direction vector $\boldsymbol{v}_i(t)$ and speed $s$. 
 The individuals avoid collisions with their neighbors by turning away from individuals $j$ within distance $\alpha$ according to
 \begin{equation}
@@ -54,3 +51,21 @@ A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}
 where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
 \\\\
 The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation 0.01, in order to simulate stochastic factors that make impact on the movement of the group. 
+
+\subsection{Movement} % (fold)
+\label{sub:movement}
+In each time step an individual can change its direction by a maximum of $\theta \Delta t$. 
+If the difference in angle between its calculated wanted new direction $\boldsymbol{d}_i''$ and its current direction is lower than $\theta \Delta t$, its velocity will be set to $\boldsymbol{v}_i(t + \Delta t) = \boldsymbol{d}_i''$.
+If it is higher, it will be changing its direction angle with $\theta \Delta t$ towards direction $\boldsymbol{d}_i''$. 
+The new velocity $\boldsymbol{v}_i(t + \Delta t)$ will then be used to calculate the new position, as 
+\begin{equation}
+	\boldsymbol{c}_i(t+\Delta t) = \boldsymbol{c}_i(t) + \boldsymbol{v}_i(t + \Delta t)\Delta t s_i,
+\end{equation}
+where $s_i$ is the speed of the individual
+% subsection movement (end)
+
+\subsection{Elongation} % (fold)
+\label{sub:elongation}
+A bounding box is calculated for given time steps, which is defined as the smallest box that can contain all individuals in the simulations, having one side parallel to the mean direction of the group in that time step, and the other side perpendicular.
+The elongation is defined as the length of the parallel side divided the length of the perpendicular side.
+% subsection elongation (end)
