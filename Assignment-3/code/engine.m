@@ -12,11 +12,7 @@ g = [1;0];
 gAngle = atan2(g(2),g(1));
 
 %Nvals = [10 30 50 100 200];
-<<<<<<< HEAD
 Nvals = [30];
-=======
-Nvals = [50];
->>>>>>> f0ea67b84f908082c33baf01fb2100ffa2fc1df7
 pvals = 0:0.1:1;
 elongvals = zeros(length(pvals),length(Nvals));
 accuracy = zeros(length(pvals),length(Nvals));
