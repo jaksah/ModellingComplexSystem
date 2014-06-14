@@ -1,6 +1,6 @@
 %% Flocks with nearest neighbours
 function [elong, centroid] = couzin(N, T, w, p, a, rho, gam,g, plotornot)
-
+%N=30; T=1000; w=0.5; p=0.5; a=1; rho=6; gam=0; g=[1;1];plotornot =0;
 %{ 
 	N - Number of individuals
 	T - Number of timesteps
@@ -80,7 +80,7 @@ for t=1:T
     V = atan2(d(2,:,t+1),d(1,:,t+1)) + randAngles;
     d(:,:,t+1) = [cos(V) ; sin(V)]; % d is now normalized
     groupdir(:,t+1) = mean(d(:,:,t+1),2);
-    centroid(:,t+1) = mean(c(:,:,t+1),2);
+    
 	d_angles = atan2(d(2,:,t+1),d(1,:,t+1));
 	v_angles = atan2(v(2,:,t),v(1,:,t));
 	for i=1:N
@@ -95,7 +95,7 @@ for t=1:T
 	
 	v(:,:,t+1) = s*d(:,:,t+1);
 	c(:,:,t+1) = c(:,:,t) + dt*v(:,:,t+1);
-	
+	centroid(:,t+1) = mean(c(:,:,t+1),2);
 	[bb, e] = orientedBoundingBox(c(:,:,t), groupdir(:,t));
 	elong(t) = e;
 	

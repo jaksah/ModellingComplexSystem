@@ -7,12 +7,12 @@ a = 1; % Minimum distance between particles
 rho = 6; % Radius of particles to interact with
 gam = 0; % Uncertainty of preferred direction
 plotornot = 0; 
-reps = 5;
+reps = 10;
 g = [1;0];
 gAngle = atan2(g(2),g(1));
 
 %Nvals = [10 30 50 100 200];
-Nvals = [30];
+Nvals = [100];
 pvals = 0:0.1:1;
 elongvals = zeros(length(pvals),length(Nvals));
 accuracy = zeros(length(pvals),length(Nvals));
@@ -40,7 +40,7 @@ end
 
 %% 
 %pvals = 0:0.1:1;
-plot(pvals,accuracy(:,1),'o-')
+plot(pvals,1-accuracy(:,1),'o-')
 xlabel('p')
 ylabel('Accuracy')
 hold on
