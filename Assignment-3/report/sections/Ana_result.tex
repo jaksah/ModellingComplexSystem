@@ -1,5 +1,4 @@
-If a group of informed individuals are moving in the \emph{front line} of the group, these informed group will walk in a circular shape, making a quadratic bounding box surrounding them. 
-The rest of the group will follow the informed group, so that if there are the same number of uninformed individuals as informed, they will together make up a bounding box with elongation of about 2, meaning that the side of the bounding box parallel to the direction is twice as long as the side perpendicular to the direction.
+These results are based on the assumptions that the $Np$ informed individuals are guiding and moving in front of the rest, that they move in a circle making a quadratic bounding box around them, and that all individuals maintain a homogenous density with distance $\alpha$ to each other. This justifies the approximation illustrated in Figure \ref{fig:distr}. There will effectively be $Np\omega$ guiding individuals if the weight $\omega$ is taken into account.
 \newcommand{\figwidth}{0.21\textwidth}
 \begin{figure}[H]
 	\centering
@@ -24,8 +23,7 @@ The rest of the group will follow the informed group, so that if there are the s
 	\caption{Assumption of distribution when 4 out of 12 particles have information of destination. Circles indicates informed particles, solid dots indicates uninformed.}
 	\label{fig:distr_direction}
 \end{figure}
-From the definition of Elongation, see section \ref{sub:elongation}, we can formulate an approximation of the elongation that is valid when the informed individuals have enough influence to guide the rest. 
-With a distance between particles of length $\alpha$ we can define the parameters in Figure \ref{fig:distr_direction} as
+From the definition of Elongation, see section \ref{sub:elongation}, we can formulate an approximation of the elongation that is valid when the informed individuals have enough influence to guide the rest. With a distance between particles of length $\alpha$ we can define the parameters in Figure \ref{fig:distr_direction} as
 \begin{align}
 	h &= (\sqrt{Np\omega}-1)\alpha \\
 	w & = (\frac{N}{\sqrt{Np\omega}} -1) \alpha.
