@@ -13,6 +13,7 @@ reps = 1;
 Nvals = [30];
 pvals = 0:0.05:1;
 elongvals = zeros(length(pvals),length(Nvals));
+groupdirvals = zeros(length(pvals),length(Nvals));
 tic;
 for Nidx=1:length(Nvals)
 	N = Nvals(Nidx)
@@ -22,15 +23,21 @@ for Nidx=1:length(Nvals)
 			rep
 			toc
 			[e, groupdir] = couzin(N, T, w, p, a, rho, gam, plotornot);
-			elongvals(pidx,Nidx) = elongvals(pidx,Nidx) + mean(e(end-100:end));
+			elongvals(pidx,Nidx) = elongvals(pidx,Nidx) + mean(e(end-10:end));
 		end
 		elongvals(pidx,Nidx) = elongvals(pidx,Nidx)/reps;
+        groupdirvals(pidx,Nidx) = groupdirvals(pidx,Nidx)/reps;
 	end
 end
 %%
+
+%%
+figure()
 plot(pvals,elongvals(:,1),'o-')
 xlabel('p')
-ylabel('Elongitude')
-hold on
-y = 1./pvals;
-plot(pvals, y,'.')
+ylabel('Group elongation')
+
+figure()
+plot(pvals,accuracy(:,1),'o-')
+xlabel('p')
+ylabel('Group accuracy')

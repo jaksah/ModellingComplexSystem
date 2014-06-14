@@ -1,5 +1,5 @@
 %% Flocks with nearest neighbours
-function [elong, groupdir] = couzin(N, T, w, p, a, rho, gam, plotornot)
+function [elong, groupdir, centroid] = couzin(N, T, w, p, a, rho, gam, plotornot)
 
 %{ 
 	N - Number of individuals
@@ -17,12 +17,12 @@ if plotornot
 end
 dt = 0.2; % time step
 s = a; % constant speed
-L=20; %L is the size of the domain on which the particles can move
 theta = 2;
 
 c=zeros(2,N,T+1); % Position of all individuals at all timesteps
 v=zeros(2,N,T+1); % Direction vector of all individuals at all timesteps
 d=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
+centroid=zeros(2,N,T+1); % Desired direction of all individuals at all timesteps
 nInformed = round(N*p);
 g=ones(2,nInformed)/sqrt(2); % Preferred direction of informed individuals
 cDiff = zeros(2,N,N);
@@ -32,13 +32,6 @@ v(:,:,1) = rand(2,N); % Random initial direction
 elong = zeros(1,T);
 groupdir = zeros(2,T);
 groupdir(:,1) = mean(d(:,:,1),2);
-% T(i,j) gives the angle with the x axis of the direction of motion of the ith
-% particle at time j
-%T=zeros(N,J+1);
-%T(:,1)=2*pi*rand(N,1); %define initial direction of all particles
-%fi = zeros(1,J+1);
-%fi(1) = abs(1/N*sqrt(sum(cos(T(:,1)))^2+sum(sin(T(:,1)))^2)); % Global alignment
-
 
 %For all time steps
 for t=1:T
@@ -80,6 +73,7 @@ for t=1:T
     V = atan2(d(2,:,t+1),d(1,:,t+1)) + randAngles;
     d(:,:,t+1) = [cos(V) ; sin(V)]; % d is now normalized
     groupdir(:,t+1) = mean(d(:,:,t+1),2);
+    centroid(:,t+1) = mean(c(:,:,t+1),2);
 	d_angles = atan2(d(2,:,t+1),d(1,:,t+1));
 	v_angles = atan2(v(2,:,t),v(1,:,t));
 	for i=1:N
