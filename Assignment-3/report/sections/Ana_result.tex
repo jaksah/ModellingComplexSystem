@@ -24,13 +24,13 @@ The rest of the group will follow the informed group, so that if there are the s
 	\caption{Assumption of distribution when 4 out of 12 particles have information of destination. Circles indicates informed particles, solid dots indicates uninformed.}
 	\label{fig:distr_direction}
 \end{figure}
-From the definition of Elongation, see \ref{sub:elongation}, we can put up a master equation for the elongation. 
+From the definition of Elongation, see section \ref{sub:elongation}, we can formulate an approximation of the elongation that is valid when the informed individuals have enough influence to guide the rest. 
 With a distance between particles of length $\alpha$ we can define the parameters in Figure \ref{fig:distr_direction} as
 \begin{align}
-	h\cdot w &= N \\
-	w &= (\sqrt{Np}-1)\alpha.
+	h &= (\sqrt{Np\omega}-1)\alpha \\
+	w & = (\frac{N}{\sqrt{Np\omega}} -1) \alpha.
 \end{align}
 The elongation is calculated as 
 \begin{equation}
-	E = \frac{h}{w} = \frac{N}{(\alpha(\sqrt{Np}-1))^2}.
+	E = \frac{w}{h} = \frac{(\frac{N}{\sqrt{Np\omega}} -1)}{\sqrt{Np\omega}-1}.
 \end{equation}

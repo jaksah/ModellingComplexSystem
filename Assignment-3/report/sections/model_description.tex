@@ -49,21 +49,19 @@ A proportion $p$ of the individuals know in which direction $\hat{\boldsymbol{g}
 \label{eq:attraction}
 \end{equation}
 where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}}$; $\omega=0$ makes the individual move only by social interaction and the higher the value of $\omega$, the more the individual moves in the known direction.
-\\\\
-The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation 0.01, in order to simulate stochastic factors that make impact on the movement of the group. 
 
 \subsection{Movement} % (fold)
 \label{sub:movement}
-The directions of all the individuals in each time step will be offset by a small angle, randomized as a Gaussian distribution centered on 0 with a standard deviation $\sigma = 0.01$.
+The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation $\sigma = 0.01$, in order to simulate stochastic behaviors of the group.
 \\\\
 In each time step an individual can change its direction by a maximum angle of $\theta \Delta t$. 
-If the difference in angle between its calculated wanted new direction $\boldsymbol{d}_i''$ and its current direction is lower than $\theta \Delta t$, its velocity will be set to $\boldsymbol{v}_i(t + \Delta t) = \boldsymbol{d}_i''$.
+If the difference between its calculated wanted new direction $\boldsymbol{d}_i''$ and its current direction is lower than $\theta \Delta t$, its velocity will be set to $\boldsymbol{v}_i(t + \Delta t) = \boldsymbol{d}_i''$.
 If it is higher, the individual will be changing its direction angle with $\theta \Delta t$ towards direction $\boldsymbol{d}_i''$. 
 The new velocity $\boldsymbol{v}_i(t + \Delta t)$ will then be used to calculate the new position, as 
 \begin{equation}
 	\boldsymbol{c}_i(t+\Delta t) = \boldsymbol{c}_i(t) + \boldsymbol{v}_i(t + \Delta t)\Delta t s_i,
 \end{equation}
-where $s_i$ is the speed of the individual
+where $s_i$ is the speed of the individual.
 % subsection movement (end)
 
 \subsection{Elongation} % (fold)
