@@ -46,7 +46,7 @@ ylabel('Accuracy')
 hold on
 %%
 
-plot(pvals,elongvals(:,1),'o-')
+plot(pvals,elongvals(:,1),'rx-')
 xlabel('p')
 ylabel('Elongation')
 hold on
@@ -54,9 +54,9 @@ hold on
 
 y = (N./(((sqrt(N.*pvals)-ones(size(pvals)))*a).^2));
 %y = (2./pvals);
-plot(pvals, y,'.:')
+plot(pvals, y,'k.:')
 set(gca, 'YLim', [0 5])
-legend('Simulation', 'Approximation')
+legend('Simulation', 'Approximation','Master Equation')
 
 %%
 alpha = 1;
