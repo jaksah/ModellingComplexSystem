@@ -52,9 +52,7 @@ where $\omega$ decides the influence of the known direction $\hat{\boldsymbol{g}
 
 \subsection{Movement} % (fold)
 \label{sub:movement}
-The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation $\sigma = 0.01$, in order to simulate stochastic behaviors of the group.
-\\\\
-In each time step an individual can change its direction by a maximum angle of $\theta \Delta t$. 
+The direction of each individual is rotated by a small random angle, picked from a normal distribution with mean zero and standard deviation $\sigma = 0.01$, in order to simulate stochastic behaviors of the group. In each time step an individual can change its direction by a maximum angle of $\theta \Delta t$. 
 If the difference between its calculated wanted new direction $\boldsymbol{d}_i''$ and its current direction is lower than $\theta \Delta t$, its velocity will be set to $\boldsymbol{v}_i(t + \Delta t) = \boldsymbol{d}_i''$.
 If it is higher, the individual will be changing its direction angle with $\theta \Delta t$ towards direction $\boldsymbol{d}_i''$. 
 The new velocity $\boldsymbol{v}_i(t + \Delta t)$ will then be used to calculate the new position, as 
@@ -76,7 +74,7 @@ The accuracy of the group is defined as
 \begin{equation}
 	\hat{a} = \text{mean} ((r - g)^2),
 \end{equation}
-where $r$ is the group direction angle, in relation to the positive x-axis, and $g$ is the angle to food in relation to the positive x-axis, so that for a completely random direction of the group, an average of 0.5 would be expected. After this, a normalization was done to have values between 0 and 1, as
+where $r$ is the group direction angle in relation to the positive x-axis, and $g$ is the angle to food in relation to the positive x-axis, so that for a completely random direction of the group, an average of 0.5 would be expected. This is then mapped to values between 0 and 1 by
 \begin{equation}
 	a = 2(\hat{a} - 0.5).
 \end{equation}
