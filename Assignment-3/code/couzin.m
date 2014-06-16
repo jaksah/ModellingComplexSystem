@@ -101,9 +101,11 @@ for t=1:T
 	
 	if plotornot
 		qscale = 1;
-		quiver(c(1,:,t),c(2,:,t),d(1,:,t)*qscale,d(2,:,t)*qscale,...
-			'AutoScaleFactor',0.1,'Marker','.','Markersize',10,'Color','k');
+		quiver(c(1,1:nInformed,t),c(2,1:nInformed,t),d(1,1:nInformed,t)*qscale,d(2,1:nInformed,t)*qscale,...
+			'AutoScaleFactor',0.1,'Marker','.','Markersize',10,'Color','r');
 		hold on
+        quiver(c(1,nInformed+1:end,t),c(2,nInformed+1:end,t),d(1,nInformed+1:end,t)*qscale,d(2,nInformed+1:end,t)*qscale,...
+			'AutoScaleFactor',0.1,'Marker','.','Markersize',10,'Color','k');
 		plot(bb(1,[1:end 1]), bb(2,[1:end 1]),'r-')
 		hold off
 		xlabel('X position')
